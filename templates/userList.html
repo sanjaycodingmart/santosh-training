@@ -1,0 +1,95 @@
+{% extends "adminHome.html" %} {% block adminbody %}
+<div class="PendingRequstList">
+  <p>User List</p>
+  {% for message in messages%} {{message}} {% endfor %}
+  <br />
+  <div class="table">
+    <table>
+      <thead>
+        <tr key="thead">
+          <th>Name</th>
+          <th>Mail</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody key="tbody">
+        {% for userlist in userlists %}
+        <tr>
+          <td>{{userlist.name}}</td>
+          <td>{{userlist.email}}</td>
+          <td>
+            <a
+              key="{{userlist.email}}"
+              class="edit-userlist"
+              onclick="sa('{{userlist.email}}','{{userlist.mobileno}}')"
+            >
+              Edit
+            </a>
+          </td>
+          <td>
+            <a href="delete/{{userlist.email}}" class="del-userlist">
+              delete
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <br />
+      <span class="close">&times;</span>
+      <h2>Edit details</h2>
+      <br />
+    </div>
+    <br />
+    <div class="modal-body">
+      <form id="form" method="POST">
+        {% csrf_token %} Email :
+        <input type="email" name="useremail" id="email" disabled /><br /><br />
+        Old Mobile.no :
+        <input
+          type="number"
+          name="oldmobileno"
+          id="oldmobileno"
+          disabled
+        /><br /><br />
+        New Mobile.no :
+        <input
+          type="number"
+          name="newmobileno"
+          placeholder="Enter new Mobile.no"
+          required
+        /><br /><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <br />
+  </div>
+</div>
+<script>
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+  function sa(email, mobileno) {
+    document.getElementById("email").value = email;
+    document.getElementById("oldmobileno").value = mobileno;
+    document.getElementById("form").action = "adminedit/" + email;
+    modal.style.display = "block";
+  }
+</script>
+{% endblock %}

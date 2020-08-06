@@ -1,0 +1,72 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.section {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+  height: 100vh;
+  background-color: dodgerblue;
+}
+.form {
+  border: 1px solid;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+.form h1 {
+  color: dodgerblue;
+  margin-bottom: 15px;
+}
+.form select {
+  width: 200px;
+}
+.form input,
+.form select {
+  margin: 15px 20px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 5px;
+  border-bottom: 1px solid dodgerblue;
+}
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  width: 180px;
+}
+.form input[type="submit"] {
+  color: white;
+  border: none;
+  width: 100px;
+  padding: 10px 15px;
+  background-color: dodgerblue;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+.form input:focus,
+form select:focus,
+.form option {
+  outline: none;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+.form p {
+  color: dodgerblue;
+  margin: 7px;
+}
+.form a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.error {
+  color: red;
+}

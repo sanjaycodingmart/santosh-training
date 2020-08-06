@@ -1,0 +1,67 @@
+<div class="profile">
+  <h2><u> {{user.role}} Profile</u></h2>
+  <br />
+  <h3>Name : {{user.name}}</h3>
+  <br />
+  <h3>Email : {{user.email}}</h3>
+  <br />
+  <h3>Role : {{user.role}}</h3>
+  <br />
+  <h3>Mobile.no : {{user.mobileno}}</h3>
+  <br />
+  <a style="color: blue;" id="myBtn">Change password</a>
+  <br />
+  <br />
+  <a style="color: blue;" id="myBtntwo">Change mobile number</a>
+  <br />
+  <br />
+  <h4 class="error">
+    {% for message in messages%} {{message}} {% endfor %}
+  </h4>
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <br />
+        <span class="close">&times;</span>
+        <h2>Change password</h2>
+        <br />
+      </div>
+      <br />
+      <div class="modal-body">
+        <form action="changepassword" method="POST">
+          {% csrf_token %}
+          <br />
+          Old password :
+          <input type="password" name="oldpassword" required /><br /><br />
+          New password :
+          <input type="password" name="newpassword" required /><br /><br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <br />
+    </div>
+  </div>
+  <div id="myModaltwo" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <br />
+        <span class="closetwo">&times;</span>
+        <h2>Change Mobile.no</h2>
+        <br />
+      </div>
+      <br />
+      <div class="modal-body">
+        <form action="changemobileno" method="POST">
+          {% csrf_token %}
+          <br />
+          New Mobile.no :
+          <input type="text" name="mobileno" required /><br /><br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>

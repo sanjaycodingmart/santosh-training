@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static './assets/css/index.css' %}" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="form">
+        <form action="register" method="POST">
+          {% csrf_token %}
+          <h1>SIGN UP</h1>
+
+          <input
+            class="box"
+            type="text"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <br />
+
+          <input
+            class="box"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <br />
+
+          <input
+            class="box"
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <br />
+          <input
+            class="box"
+            type="number"
+            name="mobileno"
+            placeholder="Mobile No"
+            required
+          />
+          <br />
+          <br />
+          <input
+            type="submit"
+            id="submitDetails"
+            name="submitDetails"
+            value="Submit"
+          />
+          <br />
+          <h4 class="error">
+            {% for message in messages%} {{message}} {% endfor %}
+          </h4>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
