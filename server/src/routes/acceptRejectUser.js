@@ -23,7 +23,7 @@ router.post("/changeinterval", roleCheck("Admin"), async (req, res) => {
   try {
     timing.update(
       {
-        value: interval,
+        value: req.query.interval,
       },
       {
         where: {
