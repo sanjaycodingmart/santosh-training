@@ -1,5 +1,6 @@
 {% load static %}
-
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +42,8 @@
           <h4 class="error">
             {% for message in messages%} {{message}} {% endfor %}
           </h4>
-          <br />
+          <p>OR</p>
+            <button class="google"><a href="{% provider_login_url "google" %}">Google</a></button>
           <p>Have not account yet?</p>
           <a href="register">
             Sign up

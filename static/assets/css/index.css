@@ -40,7 +40,8 @@
 .form input[type="password"] {
   width: 180px;
 }
-.form input[type="submit"] {
+.form input[type="submit"],
+.google {
   color: white;
   border: none;
   width: 100px;

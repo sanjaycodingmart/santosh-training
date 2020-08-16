@@ -1,23 +1,18 @@
+{% extends "home.html" %} {% block body %}
 <div class="profile">
-  <h2><u> {{user.role}} Profile</u></h2>
-  <br />
-  <h3>Name : {{user.name}}</h3>
-  <br />
-  <h3>Email : {{user.email}}</h3>
-  <br />
-  <h3>Role : {{user.role}}</h3>
-  <br />
-  <h3>Mobile.no : {{user.mobileno}}</h3>
-  <br />
+  <h4><u> {{user.role}} Profile</u></h4>
+  <h5>Name : {{user.name}}</h5>
+  <h5>Email : {{user.email}}</h5>
+  <h5>Role : {{user.role}}</h5>
+  <h5>Mobile.no : {{user.mobileno}}</h5>
   <a style="color: blue;" id="myBtn">Change password</a>
-  <br />
   <br />
   <a style="color: blue;" id="myBtntwo">Change mobile number</a>
   <br />
   <br />
-  <h4 class="error">
+  <h5 class="error">
     {% for message in messages%} {{message}} {% endfor %}
-  </h4>
+  </h5>
   <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
@@ -65,3 +60,5 @@
     </div>
   </div>
 </div>
+
+{% endblock %}

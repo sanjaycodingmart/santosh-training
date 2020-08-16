@@ -1,10 +1,9 @@
-{% extends "adminHome.html" %} {% block adminbody %}
+{% extends "home.html" %} {% block body %}
 <div class="PendingRequstList">
   <p>User List</p>
   {% for message in messages%} {{message}} {% endfor %}
-  <br />
   <div class="table">
-    <table>
+    <table class="shadow-sm p-3 bg-white rounded">
       <thead>
         <tr key="thead">
           <th>Name</th>
@@ -44,7 +43,7 @@
     <div class="modal-header">
       <br />
       <span class="close">&times;</span>
-      <h2>Edit details</h2>
+      <h5>Edit details</h5>
       <br />
     </div>
     <br />

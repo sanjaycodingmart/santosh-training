@@ -2,14 +2,28 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils.crypto import get_random_string
 # import bcrypt
+from django.contrib.auth.models import User
 from django.contrib import messages
 from accounts.models import Register
 from django.core.mail import EmailMessage
 import string
 from decouple import config
+from time import gmtime,strftime
+import requests
+import threading
 
 # Create your views here.
 
+class EmailMessageThread(threading.Thread):
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send()
+
+def emailthread(email):
+    email.send()
 
 def register(req):
     if req.method == 'POST':
@@ -32,7 +46,9 @@ def register(req):
 
 
 def login(req):
-    if req.method == 'POST':
+    if req.method != 'POST':
+        return render(req,'login.html')
+    else:
         email = req.POST['email']
         password = req.POST['password']
         if Register.objects.filter(email=email).exists():
@@ -57,8 +73,27 @@ def login(req):
         else:
             messages.info(req, 'Email not exits')
             return redirect("login")
+
+def googlesignin(req):
+    if req.method == 'GET' and req.user:
+        dbUser = User.objects.filter(username=req.user).values('username','email','password')[0]
+        # print(db['email'])
+        try:
+            dbRegister = Register.objects.filter(email=dbUser['email']).values('name', 'email','status')[0]
+        except:
+            dbRegister = Register.objects.create(name=dbUser['username'],email=dbUser['email'],password=dbUser['password'],forgot_password="",mobileno="")
+        if dbRegister['status']:
+            req.session['userName'] = dbRegister['name']
+            req.session['userEmail'] = dbRegister['email']
+            req.session['userRole'] = 'User'
+            dbUser['username'] = ' '
+            return redirect("home/user")
+        else:
+            messages.info(req, 'You are rejected by admin')
+            return redirect("login")
     else:
-        return render(req,'login.html')
+        messages.info(req, 'Try Again!!')
+        return redirect("login")
 
 def logout(req):
     req.session['userRole']=''
@@ -79,7 +114,7 @@ def changepassword(req):
             messages.info(req, 'Password change successfully')
             return redirect("profile")
         else:
-            messages.info(req, 'Password not change')
+            messages.info(req, 'Password not change. You or signin with google OR You enterd ols password as wrong!!!')
             return redirect("profile")
     else:
         messages.info(req, 'Login required')
@@ -127,6 +162,7 @@ def delete(req, email):
         messages.info(req, 'Login required')
         return render(req, 'login.html')
 
+
 def forgotpassword(req):
     if req.method == 'POST':
         email = req.POST['email']
@@ -139,7 +175,10 @@ def forgotpassword(req):
             # print(link)
             try:
                 email = EmailMessage('Reset password', link, to=[email])
-                email.send()
+                threaademail = threading.Thread(target=emailthread, args=(email,))
+                threaademail.start()
+                # EmailMessageThread(email).start()
+                # email.send()
                 messages.info(req, 'Mail send successflly')
             except:
                 messages.info(req, 'Please check your connection!!!')
@@ -149,13 +188,19 @@ def forgotpassword(req):
     else:
         return render(req, 'forgotpassword.html')
 
-def resetpassword(req,hash):
-    if req.method == 'POST' and Register.objects.get(forgot_password=hash).exists():
+def resetpassword(req, hash):
+    if req.method == 'POST':
         password = make_password(req.POST['password'])
         db = Register.objects.get(forgot_password=hash)
         db.password = password
+        # db.forgot_password = ' '
         db.save()
         messages.info(req, 'Password reset successfully')
+        return redirect("login")
     else:
-        messages.info(req, 'Please enter valid reset link')
-    return redirect("login")
+        try:
+            db = Register.objects.get(forgot_password=hash)
+            return render(req, 'resetpassword.html', {'email': db.email,'hash':hash})
+        except:
+            messages.info(req, 'Checck Your link')
+            return redirect("login")

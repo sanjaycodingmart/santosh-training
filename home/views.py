@@ -3,29 +3,20 @@ from django.contrib import messages
 from accounts.models import Register
 
 # Create your views here.
-def admin(req):
-    if req.session['userRole']=="Admin":
-        return render(req, 'adminHome.html',{"name":req.session["userName"]})
+def home(req):
+    if req.session['userRole']=="Admin" or req.session['userRole']=="User":
+        print(req.session["userRole"])
+        return render(req, 'home.html',{"name":req.session["userName"],"role":req.session["userRole"]})
     else:
         messages.info(req, 'Login required')
         return redirect("login")
 
-def user(req):
-    if req.session['userRole']=="User":
-        return render(req, 'userHome.html',{"name":req.session["userName"]})
-    else:
-        messages.info(req, 'Login required')
-        return redirect("login")
 
 def profile(req):
-    try:
+    if req.session['userRole']=="User" or req.session['userRole'] == "Admin":
         user = Register.objects.filter(email=req.session['userEmail']).values("name", "email", "role","mobileno")[0]
-        print(user)
-        if req.session['userRole']=="User":
-            return render(req, 'userProfile.html',{'user':user})
-        elif req.session['userRole'] == "Admin":
-            return render(req, 'AdminProfile.html',{'user':user})
-    except:
+        return render(req, 'profile.html',{'user':user,"name":req.session["userName"],"role":req.session["userRole"]})
+    else:
         messages.info(req, 'Login required')
         return redirect("login")
 
@@ -33,7 +24,7 @@ def userlist(req):
     if req.session['userRole'] == "Admin":
         db = Register.objects.filter(status=True,role='User').all().values("name", "email","mobileno")
         print(db)
-        return render(req,'userList.html',{'userlists':db})
+        return render(req,'userList.html',{'userlists':db,"name":req.session["userName"],"role":req.session["userRole"]})
     else:
         messages.info(req, 'Login required')
         return redirect("login")

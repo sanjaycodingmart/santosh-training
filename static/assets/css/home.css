@@ -1,6 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .header {
@@ -67,8 +68,8 @@ a {
 table {
   margin-top: 10px;
   border-collapse: collapse;
-  margin-left: 25%;
-  width: 50%;
+  margin-left: 10%;
+  width: 80%;
 }
 
 td,
