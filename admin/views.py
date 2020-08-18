@@ -1,22 +1,51 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from accounts.models import Register
+from accounts.models import Register,Apps
+import jwt
+from decouple import config
+
 
 # Create your views here.
-def home(req):
-    if req.session['userRole']=="Admin":
-        # print(req.session["userRole"])
-        return render(req, 'home.html',{"name":req.session["userName"],"role":req.session["userRole"]})
+
+def check_apps_autherization(req):
+    try:
+        apps = Apps.objects.filter(app_name='Admin').values("token")[0]
+        value = jwt.decode(bytes(apps['token']), config('SECRET'), algorithms=['HS256'])
+        return True
+    except:
+        print("error")
+
+def session_check(req):
+    if req.session['userRole'] == "Admin":
+        return True
     else:
         messages.info(req, 'Login required')
         return redirect("login")
 
-def userlist(req):
-    print(req.method)
-    if req.session['userRole'] == "Admin":
-        db = Register.objects.filter(status=True,role='User').all().values("name", "email","mobileno")
-        # print(db)
-        return render(req,'userList.html',{'userlists':db,"name":req.session["userName"],"role":req.session["userRole"]})
+def home(req):
+    if check_apps_autherization(req)==True:
+        if session_check(req):
+            # print(req.session["userRole"])
+            return render(req, 'home.html',{"name":req.session["userName"],"role":req.session["userRole"]})
     else:
-        messages.info(req, 'Login required')
+        messages.info(req, 'Admin app auth fail')
+        return redirect("login")
+
+def userlist(req):
+    if check_apps_autherization(req)==True:
+        if session_check(req):
+            db = Register.objects.filter(status=True,role='User').all().values("name", "email","mobileno")
+            # print(db)
+            return render(req, 'userList.html', {'userlists': db, "name": req.session["userName"], "role": req.session["userRole"]})
+    else:
+        messages.info(req, 'Admin app auth fail')
+        return redirect("login")
+
+def profile(req):
+    if check_apps_autherization(req)==True:
+        if session_check(req):
+            user = Register.objects.filter(email=req.session['userEmail']).values("name", "email", "role","mobileno")[0]
+            return render(req, 'profile.html',{'user':user,"name":req.session["userName"],"role":req.session["userRole"]})
+    else:
+        messages.info(req, 'Admin app auth fail')
         return redirect("login")

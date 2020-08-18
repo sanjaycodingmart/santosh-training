@@ -13,7 +13,6 @@ import requests
 import threading
 
 # Create your views here.
-
 class EmailMessageThread(threading.Thread):
     def __init__(self, email):
         self.email = email

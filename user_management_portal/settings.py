@@ -44,9 +44,18 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    # 'admin.apps.AdminConfig',
+    # 'accounts.apps.AccountsConfig',
+    'users.apps.UsersConfig',
+    'rest_framework',
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
 SITE_ID = 2
 LOGIN_REDIRECT_URL = 'googlesignin'

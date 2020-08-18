@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
@@ -8,7 +8,7 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('forgotpassword', views.forgotpassword, name='forgotpassword'),
     path('resetpassword/<str:hash>', views.resetpassword, name='resetpassword'),
-    path('home/logout',views.logout,name='logout'),
+    re_path('logout',views.logout,name='logout'),
     path('home/changepassword',views.changepassword,name='change password'),
     path('home/changemobileno',views.changemobileno,name='change mobileno'),
     path('home/delete/<str:email>', views.delete, name='delete'),
