@@ -3,8 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.login, name='login'),
-    path('login',views.login,name='login'),
-    path('googlesignin',views.googlesignin,name='googlesignin'),
+    re_path('login',views.login,name='login'),
+    # path('googlesignin',views.googlesignin,name='googlesignin'),
     path('register', views.register, name='register'),
     path('forgotpassword', views.forgotpassword, name='forgotpassword'),
     path('resetpassword/<str:hash>', views.resetpassword, name='resetpassword'),

@@ -32,6 +32,8 @@
             required
           />
           <br />
+           <a href="forgotpassword"  class="right">forgotpassword</a>
+          <br />
           <input
             type="submit"
             id="submitDetails"
@@ -39,11 +41,12 @@
             value="Submit"
           />
           <br />
+
           <h4 class="error">
             {% for message in messages%} {{message}} {% endfor %}
           </h4>
           <p>OR</p>
-            <button class="google"><a href="{% provider_login_url "google" %}">Google</a></button>
+            <!-- <button class="google"><a href="{% provider_login_url "google" %}">Google</a></button> -->
           <p>Have not account yet?</p>
           <a href="register">
             Sign up

@@ -13,6 +13,8 @@ import requests
 import threading
 
 # Create your views here.
+
+# Thread
 class EmailMessageThread(threading.Thread):
     def __init__(self, email):
         self.email = email
@@ -73,26 +75,6 @@ def login(req):
             messages.info(req, 'Email not exits')
             return redirect("login")
 
-def googlesignin(req):
-    if req.method == 'GET' and req.user:
-        dbUser = User.objects.filter(username=req.user).values('username','email','password')[0]
-        # print(db['email'])
-        try:
-            dbRegister = Register.objects.filter(email=dbUser['email']).values('name', 'email','status')[0]
-        except:
-            dbRegister = Register.objects.create(name=dbUser['username'],email=dbUser['email'],password=dbUser['password'],forgot_password="",mobileno="")
-        if dbRegister['status']:
-            req.session['userName'] = dbRegister['name']
-            req.session['userEmail'] = dbRegister['email']
-            req.session['userRole'] = 'User'
-            dbUser['username'] = ' '
-            return redirect("home/user")
-        else:
-            messages.info(req, 'You are rejected by admin')
-            return redirect("login")
-    else:
-        messages.info(req, 'Try Again!!')
-        return redirect("login")
 
 def logout(req):
     req.session['userRole']=''

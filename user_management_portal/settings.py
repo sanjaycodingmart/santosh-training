@@ -47,18 +47,18 @@ INSTALLED_APPS = [
     # 'admin.apps.AdminConfig',
     # 'accounts.apps.AccountsConfig',
     'users.apps.UsersConfig',
-    'rest_framework',
+    # 'rest_framework',
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ],
+# }
 
 SITE_ID = 2
-LOGIN_REDIRECT_URL = 'googlesignin'
+# LOGIN_REDIRECT_URL = 'googlesignin'
 
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
@@ -84,6 +84,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware'
 ]
 
 ROOT_URLCONF = 'user_management_portal.urls'
