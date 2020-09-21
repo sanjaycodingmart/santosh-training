@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model orders {
+  id            Int       @default(autoincrement()) @id
+  email         String
+  product_name  String
+  product_prize Int
+  usertable     usertable @relation(fields: [email], references: [email])
+}
+
+model permission {
+  id         Int       @default(autoincrement()) @id
+  permission String
+  role       String
+}
+
+model product {
+  id                  Int              @default(autoincrement()) @id
+  email               String
+  product_name        String
+  product_image       String
+  product_prize       Int
+  product_category    String
+  product_companyname String
+  product_warranty    String
+  product_assured     String
+  product_description String
+  usertable           usertable        @relation(fields: [email], references: [email])
+  product_review   product_review[]
+}
+
+model product_review {
+  product_id   Int     @default(autoincrement()) @id
+  email        String
+  name         String
+  user_comment String
+  user_rating  Int
+  product      product @relation(fields: [product_id], references: [id])
+}
+
+model timing {
+  id        Int    @default(autoincrement()) @id
+  operation String
+  value     Int
+}
+
+
+model user {
+  name           String
+  email          String   @unique
+  password       String
+  pendingrequest String
+}
+
+model useroles {
+  id             Int      @default(autoincrement()) @id
+  email          String?
+  role           String?
+  pendingrequest String?
+  status         String?
+  createdAt      DateTime
+  updatedAt      DateTime
+}
+
+model userpermission {
+  id         Int       @default(autoincrement()) @id
+  permission String
+  role       String
+}
+
+model userrole {
+  email          String    @id
+  role           String
+  pendingrequest String
+  status         String
+  doj            DateTime  @default(now())
+  usertable      usertable @relation(fields: [email], references: [email])
+}
+
+model usertable {
+  name            String
+  email           String     @id
+  password        String
+  forgot_password String?
+  orders          orders[]
+  product         product[]
+  userrole        userrole[]
+}
