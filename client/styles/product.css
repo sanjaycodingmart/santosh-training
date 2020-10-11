@@ -1,0 +1,117 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.product {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.add-product {
+  color: dodgerblue;
+}
+.list {
+  border: 1px solid black;
+  display: inline-block;
+  word-wrap: break-word;
+  width: 100px;
+  margin: 10px;
+  padding: 15px;
+  line-height: 25px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+.product-list {
+  margin: 0px 10px;
+}
+.product-list a {
+  color: dodgerblue;
+}
+.list .delete {
+  margin: 20px;
+  text-align: center;
+  color: white;
+  padding: 5px;
+  background-color: red;
+}
+
+.left {
+  float: left;
+  display: inline-block;
+}
+.single-product{
+  margin:10px;
+  padding:10px;
+  line-height:30px;
+
+}
+
+.delete,.assured,.buy{
+  text-align:center;
+   padding:10px;
+   color:white;
+}
+.delete{
+
+
+  background: red;
+
+}
+.assured{
+  background: green;
+  padding:10px;
+}
+.buy{
+
+  background: #56ccf2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2f80ed,
+    #56ccf2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2f80ed,
+    #56ccf2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ ;
+}
+.mail{
+  color:dodgerblue;
+}
+
+.img{
+  text-align: center;
+}
+
+.img img{
+  width: 600px;
+}
+
+.allproduct-list{
+  display : inline-block;
+}
+
+.view-more{
+  color : dodgerblue;
+}
+.buy-product{
+  text-align : center;
+}
+.product-comment{
+  margin: 10px 0px;
+}
+.list-comment{
+  word-wrap: break-word;
+  padding: 10px;
+  width: auto;
+  border: 1px solid black;
+}
+.comment-name{
+  display : inline-block;
+}
+.review-rating{
+  color : green;
+}

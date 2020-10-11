@@ -1,0 +1,33 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+section {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+  height: 100vh;
+  background-color: dodgerblue;
+}
+.content {
+  width: 300px;
+  border: 1px solid;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+.content h1 {
+  color: dodgerblue;
+  margin-bottom: 15px;
+}
+.mail {
+  color: dodgerblue;
+}
+.content span {
+  margin-top: 10px;
+}

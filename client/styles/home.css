@@ -1,0 +1,80 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.header {
+  color: white;
+  background: #56ccf2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2f80ed,
+    #56ccf2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2f80ed,
+    #56ccf2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  padding: 25px 30px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+.header h3,
+.header div,
+.log-out p {
+  display: inline-block;
+}
+.right {
+  float: right;
+}
+a {
+  margin-right: 10px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+.PendingRequstList a {
+  color: black;
+}
+.header .right .logout-btn,
+.login-btn,.logout-btn {
+  background-color: #fff;
+  color: dodgerblue;
+  padding: 5px 10px;
+  margin-left: 20px;
+}
+.body {
+  margin: 10px;
+}
+.body p {
+  color: dodgerblue;
+  margin-top: 10px;
+  font-size: 18px;
+}
+.PendingRequstList,.orders {
+  text-align: center;
+  margin: 20px;
+}
+.PendingRequstList .table,.orders .table {
+  text-align: center;
+}
+table {
+  margin-top: 10px;
+  border-collapse: collapse;
+  margin-left: 25%;
+  width: 50%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
